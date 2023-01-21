@@ -1,27 +1,27 @@
 {
   "api": {
-    "nomination": [
+    "nominations": [
       "offer1",
       "offer2",
       "offer3",
       "offer4",
       "offer5"
     ],
-    "description": [
+    "descriptions": [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "Sagittis eu volutpat odio facilisis mauris sit amet massa.",
       "Mollis aliquam ut porttitor leo a diam sollicitudin.",
       "Viverra mauris in aliquam sem fringilla ut morbi tincidunt.",
       "Aliquet lectus proin nibh nisl condimentum id."
     ],
-    "city": [
+    "cities": [
       "Brussels",
       "Amsterdam",
       "Hamburg",
       "Dusseldorf",
       "Cologne"
     ],
-    "imagePreview": [
+    "imagePreviews": [
       "brussels.jpg",
       "amsterdam.jpg",
       "hamburg.jpg",
@@ -35,85 +35,85 @@
       "offer4-1.jpg;offer4-2.jpg;offer4-3.jpg;offer4-4.jpg;offer4-5.jpg;offer4-6.jpg",
       "offer5-1.jpg;offer5-2.jpg;offer5-3.jpg;offer5-4.jpg;offer5-5.jpg;offer5-6.jpg"
     ],
-    "type": [
+    "types": [
       "Premium",
       "None"
     ],
-    "raiting": [
+    "raitings": [
       "4,5",
       "5",
       "3,6",
       "4,7",
       "3,9"
     ],
-    "typePlace": [
+    "typePlaces": [
       "apartment",
       "house",
       "room",
       "hotel",
       "apartment"
     ],
-    "room": [
+    "rooms": [
       "1",
       "2",
       "3",
       "2",
       "1"
     ],
-    "guest": [
+    "guests": [
       "1",
       "3",
       "2",
       "1",
       "2"
     ],
-    "price": [
+    "prices": [
       "250",
       "190",
       "650",
       "460",
       "340"
     ],
-    "comfort": [
+    "comforts": [
       "Breakfast;Air conditioning",
       "Towels",
       "Washer",
       "Fridge",
       "Laptop friendly workspace"
     ],
-    "name": [
+    "names": [
       "Daniel",
       "Ronald",
       "Charlotte",
       "Patrick",
       "Tracey"
     ],
-    "email": [
+    "emails": [
       "daniel@gmail.com",
       "ronald@gmail.com",
       "charlotte@gmail.com",
       "patrick@gmail.com",
       "tracey@gmail.com"
     ],
-    "avatar": [
+    "avatars": [
       "avatarDaniel.png",
       "avatarRonald.png",
       "avatarCharlotte.png",
       "avatarPatrick.png",
       "avatarTracey.png"
     ],
-    "password": [
+    "passwords": [
       "sdflkwjf456",
       "muikisla45",
       "qwdqwdsdqw",
       "adscqwqwd",
       "lujhdkjbv"
     ],
-    "userType": [
+    "userTypes": [
       "Pro",
       "Standart"
     ],
-    "location": [
+    "locations": [
       "latitude: 50.846557, longitude: 4.351697",
       "latitude: 52.370216, longitude: 4.895168",
       "latitude: 53.550341, longitude: 10.000654",
