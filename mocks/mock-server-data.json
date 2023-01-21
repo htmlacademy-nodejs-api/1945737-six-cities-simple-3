@@ -53,27 +53,6 @@
       "hotel",
       "apartment"
     ],
-    "rooms": [
-      "1",
-      "2",
-      "3",
-      "2",
-      "1"
-    ],
-    "guests": [
-      "1",
-      "3",
-      "2",
-      "1",
-      "2"
-    ],
-    "prices": [
-      "250",
-      "190",
-      "650",
-      "460",
-      "340"
-    ],
     "comforts": [
       "Breakfast;Air conditioning",
       "Towels",
