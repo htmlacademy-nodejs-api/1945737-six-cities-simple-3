@@ -1,0 +1,20 @@
+export type MockData = {
+  nominations: string[];
+  descriptions: string[];
+  cities: string[];
+  imagePreviews: string[];
+  placePhotos: string[];
+  types: string[];
+  raitings: string[];
+  typePlaces: string[];
+  rooms: number[];
+  guests: number[];
+  prices: number[];
+  comforts: string[];
+  names: string[];
+  emails: string[];
+  avatars: string[];
+  passwords: string[];
+  userTypes: string[];
+  locations: string[];
+};
