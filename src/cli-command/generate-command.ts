@@ -1,8 +1,9 @@
-import { appendFile } from 'fs/promises';
+import TSVFileWriter from '../common/file-writer/tsv-file-writer.js';
 import got from 'got';
 import { MockData } from '../types/mock-data.type.js';
 import { CliCommandInterface } from './cli-command.interface.js';
 import OfferGenerator from '../common/offer-generator/offer-generator.js';
+import chalk from 'chalk';
 
 export default class GenerateCommand implements CliCommandInterface {
   public readonly name = '--generate';
@@ -15,14 +16,15 @@ export default class GenerateCommand implements CliCommandInterface {
     try {
       this.initialData = await got.get(url).json();
     } catch {
-      return console.log(`Can't fetch data from ${url}.`);
+      return console.log(chalk.redBright(`Can't fetch data from ${url}.`));
     }
 
-    const OfferGeneratorString = new OfferGenerator(this.initialData);
+    const offerGeneratorString = new OfferGenerator(this.initialData);
+    const tsvFileWriter = new TSVFileWriter(filepath);
 
     for (let i = 0; i < offerCount; i++) {
-      await appendFile(filepath, `${OfferGeneratorString.generate()}\n`, 'utf8');
+      await tsvFileWriter.write(offerGeneratorString.generate());
     }
-    console.log(`File ${filepath} was created!`);
+    console.log(chalk.yellowBright(`File ${filepath} was created!`));
   }
 }
