@@ -24,7 +24,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const city = getRandomItem<string>(this.mockData.cities);
     const date = dayjs().subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
     const imagePreview = getRandomItem<string>(this.mockData.imagePreviews);
-    const placePhotos = getRandomItems<string>(this.mockData.placePhotos).join(';');
+    const placePhotos = getRandomItem<string>(this.mockData.placePhotos);
     const type = getRandomItem([OfferType.Premium, OfferType.None]);
     const raiting = getRandomItem<string>(this.mockData.raitings);
     const typePlace = getRandomItem<string>(this.mockData.typePlaces);
@@ -41,6 +41,6 @@ export default class OfferGenerator implements OfferGeneratorInterface {
 
     return [
       nomination, description, city, date, imagePreview, placePhotos, type, raiting, typePlace, room, guest, price, comfort, name, email, avatar, password, userType, location,
-    ].join('/t');
+    ].join('\t');
   }
 }
