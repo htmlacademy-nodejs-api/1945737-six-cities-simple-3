@@ -1,43 +1,35 @@
-import { readFileSync } from 'fs';
-import { OfferType } from '../../types/offer-type.enum.js';
-import { Offer } from '../../types/offer.type.js';
+import EventEmitter from 'events';
 import { FileReaderInterface } from './file-reader.interface.js';
+import { createReadStream } from 'fs';
 // import { UserType } from '../../types/user-type.enum.js';
 
-export default class TSVFileReader implements FileReaderInterface {
-  private rawData = '';
-
-  constructor(public filename: string) { }
-
-  public read(): void {
-    this.rawData = readFileSync(this.filename, { encoding: 'utf8' });
+export default class TSVFileReader extends EventEmitter implements FileReaderInterface {
+  constructor(public filename: string) {
+    super();
   }
 
-  public toArray(): Offer[] {
-    if (!this.rawData) {
-      return [];
+  public async read(): Promise<void> {
+    const stream = createReadStream(this.filename, {
+      highWaterMark: 16384,
+      encoding: 'utf-8',
+    });
+
+    let lineRead = '';
+    let endLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of stream) {
+      lineRead += chunk.toString();
+
+      while ((endLinePosition = lineRead.indexOf('\n')) >= 0) {
+        const completeRow = lineRead.slice(0, endLinePosition + 1);
+        lineRead = lineRead.slice(++endLinePosition);
+        importedRowCount++;
+
+        this.emit('line', completeRow);
+      }
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim() !== '')
-      .map((line) => line.split('\t'))
-      .map(([nomination, description, createdDate, city, imagePreview, placePhotos, type, raiting, typePlace, room, guest, price, comfort, name, email, avatar, password, userType, location]) => ({
-        nomination,
-        description,
-        date: new Date(createdDate),
-        city,
-        imagePreview,
-        placePhotos: placePhotos.split(';').map((link) => ({link})),
-        type: OfferType[type as 'Premium' | 'None'],
-        raiting: Number.parseInt(raiting, 10),
-        typePlace,
-        room: Number.parseInt(room, 10),
-        guest: Number.parseInt(guest, 10),
-        price: Number.parseInt(price, 10),
-        comfort,
-        author: {name, email, avatar, password, userType},
-        location
-      }));
+    this.emit('end', importedRowCount);
   }
 }
