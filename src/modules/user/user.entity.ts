@@ -25,8 +25,8 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({
     default: '',
     required: true,
-    minLength: [1, 'Min length for name is 1'],
-    maxLength: [15, 'Max length for name is 15'],
+    minLength: 1,
+    maxLength: 15,
   })
   public name!: string;
 
@@ -43,8 +43,6 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({
     default: '',
     type: String,
-    minLength: [6, 'Min length for password is 6'],
-    maxLength: [12, 'Max length for password is 12'],
     required: true,
   })
   private password!: string;
