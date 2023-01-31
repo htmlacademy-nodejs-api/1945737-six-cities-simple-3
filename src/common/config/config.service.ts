@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {ConfigInterface} from './config.interface.js';
 import {config} from 'dotenv';
 import {configSchema, ConfigSchema} from './config.schema.js';
