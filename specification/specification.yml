@@ -1,0 +1,373 @@
+openapi: 3.1.0
+info:
+  title: API сервер для проекта «Шесть городов (простой)».
+  description: |-
+    * Список ресурсов и маршрутов сервера «Шесть городов (простой)».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 2.0.0
+
+tags:
+  - name: users
+    description: Действия с пользователем
+  - name: offers
+    description: Действия с объявлениями
+  - name: comments
+    description: Действия с комментариями
+
+paths:
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация пользователя
+      description: Регистрирует нового пользователя
+
+      requestBody:
+        description: Информация для создания нового пользователя
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUser'
+        required: true
+
+      responses:
+        "201":
+          description: Пользователь зарегистрирован. Объект пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+
+        "409":
+          description: Пользователь с таким email уже существует
+
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля
+
+    get:
+      tags:
+        - users
+      summary: Проверка состояния пользователя
+      description: Возвращает информацию по авторизованному пользователю
+
+  /users/{userId}/avatar:
+    post:
+      tags:
+        - users
+      summary: Загрузить изображение аватара
+      description: Загружает изображение аватара пользователя. Изображение
+        аватара должно быть в формате `png` или `jpg`
+
+  /offers/creation:
+    post:
+      tags:
+        - offers
+      summary: Создание нового предложения
+      description: Передаёт информацию для создания нового предложения
+
+    get:
+      tags:
+        - offers
+      summary: Проверка успешного создания предложения
+      description: Возвращает информацию о созданном предложении (объект предложения)
+
+      requestBody:
+        description: Информация для создания нового предложения
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOffer'
+        required: true
+
+      responses:
+        "201":
+          description: Предложение создано. Объект предложения
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+
+        "409":
+          description: Валидация не пройдена
+
+    /offers/delete:
+      post:
+        tags:
+          - offers
+        summary: Удаление предложения
+        description: Передаёт ресурс для удаления предложения
+
+      get:
+        tags:
+          - offers
+        summary: Проверка user
+        description: Возвращает информацию по удалению предложения
+
+        requestBody:
+          description: Информация для удаления предложения
+          required: true
+
+        responses:
+        "201":
+          description: Предложение удалено
+
+        "409":
+          description: Нельзя удалить предложение другого пользователя
+
+    /offers/offerList:
+      post:
+        tags:
+          - offers
+        summary: Список предложений
+        description: Возвращает предложения по аренде
+
+    /offers/detailedInformation:
+      post:
+        tags:
+          - offers
+        summary: Детальная информация по предложению
+        description: Предоставляет ресурс для получения детальной информации по одному предложению
+
+    /comments/add:
+      post:
+        tags:
+          - comments
+        summary: Добавление комментария
+        description: Предоставляет ресурс для получения детальной информации по одному предложению
+
+        requestBody:
+          description: Информация для создания нового комментария
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addComment'
+          required: true
+
+        responses:
+          "201":
+            description: Комментарий создан
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/comment'
+
+          "409":
+            description: Валидация не пройдена
+
+components:
+  schemas:
+
+    createUser:
+      type: object
+
+      properties:
+        name:
+          type: string
+          example: Logan
+
+        email:
+          type: string
+          example: djdj213@gmail.com
+
+        avatar:
+          type: string
+          example: markup/img/exampleAvatar.jpeg
+
+        password:
+          type: string
+          example: 123456
+
+        userType:
+          type: string
+          example: Pro
+
+    user:
+      type: object
+
+      properties:
+        id:
+          type: string
+          example: 67dascd68wec8wec9qwdw
+
+        email:
+          type: string
+          example: djdj213@gmail.com
+
+        name:
+          type: string
+          example: Logan
+
+        avatar:
+          type: string
+          example: example.jpeg
+
+        userType:
+          type: string
+          example: Pro
+
+    createOffer:
+      type: object
+
+      properties:
+        nomination:
+          type: string
+          example: Est sit amet facilisis magna
+
+        description:
+          type: string
+          example: Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor
+
+        date:
+          type: string
+          example: 2022-06-23T16:09:19Z
+
+        city:
+          type: string
+          example: Budva
+
+        imagePreview:
+          type: string
+          example: budva.jpeg
+
+        placePhotos:
+          type: string
+          example: offer1-1.jpg;offer1-2.jpg;offer1-3.jpg;offer1-4.jpg;offer1-5.jpg;offer1-6.jpg
+
+        type:
+          type: string
+          example: None
+
+        raiting:
+          type: number
+          example: 4.5
+
+        typePlace:
+          type: string
+          example: apartment
+
+        room:
+          type: number
+          example: 2
+
+        guest:
+          type: number
+          example: 2
+
+        price:
+          type: number
+          example: 650
+
+        comfort:
+          type: string
+          example: Fridge
+
+        author:
+          type: string
+          example: '#/components/schemas/user'
+
+        location:
+          type: string
+          example: latitude 50.846557 longitude 4.351697
+
+    offer:
+      type: object
+
+      properties:
+        nomination:
+          type: string
+          example: Est sit amet facilisis magna
+
+        description:
+          type: string
+          example: Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor
+
+        date:
+          type: string
+          example: 2022-06-23T16:09:19Z
+
+        city:
+          type: string
+          example: Budva
+
+        imagePreview:
+          type: string
+          example: budva.jpeg
+
+        placePhotos:
+          type: string
+          example: offer1-1.jpg
+
+        type:
+          type: string
+          example: None
+
+        raiting:
+          type: number
+          example: 4.5
+
+        typePlace:
+          type: string
+          example: apartment
+
+        room:
+          type: number
+          example: 2
+
+        guest:
+          type: number
+          example: 2
+
+        price:
+          type: number
+          example: 650
+
+        comfort:
+          type: string
+          example: Fridge
+
+        author:
+          type: string
+          example: '#/components/schemas/user'
+
+        location:
+          type: string
+          example: latitude 50.846557 longitude 4.351697
+
+    addComment:
+      type: object
+
+      properties:
+        text:
+          type: string
+          example: Tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus quam id leo
+
+        date:
+          type: string
+          example: 2016-04-20T02:45:31Z
+
+        raiting:
+          type: number
+          example: 4
+
+    comment:
+      type: object
+
+      properties:
+        text:
+          type: string
+          example: Tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus quam id leo
+
+        date:
+          type: string
+          example: 2016-04-20T02:45:31Z
+
+        raiting:
+          type: number
+          example: 4
+
